@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace OPCLib.Models
 {
-   public class OPCTag
+   public class OPCExceptionMsg : EventArgs
    {
-      public string Id { get; set; }
-      public string Name { get; set; }
-      public string Description { get; set; }
+      public string ErrorMessage { get; set; }
    }
 }
