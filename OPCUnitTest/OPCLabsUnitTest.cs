@@ -29,7 +29,7 @@ namespace OPCUnitTest
          var resp2 = client.GetAllTags();
          Assert.IsTrue(resp2.IsSuccess);
          Assert.IsTrue(resp2.Value.Count() > 0);
-         var resp3 = client.GetTagValues(resp2.Value.ToList().OrderBy(g => new Guid()).Take(10).Select(f => f.Id).ToList());
+         var resp3 = client.GetTagValues(resp2.Value.ToList().OrderBy(g => new Guid()).Take(10).ToList());
          Assert.IsTrue(resp3.IsSuccess);
          Assert.IsTrue(resp3.Value.Count() > 0);
          var resp4 = client.CloseConnection();
@@ -45,7 +45,7 @@ namespace OPCUnitTest
          var resp2 = client.GetAllTags();
          Assert.IsTrue(resp2.IsSuccess);
          Assert.IsTrue(resp2.Value.Count() > 0);
-         var resp3 = client.GetTagValues(resp2.Value.ToList().OrderBy(g => new Guid()).Take(10).Select(f => f.Id).ToList());
+         var resp3 = client.GetTagValues(resp2.Value.ToList().OrderBy(g => new Guid()).Take(10).ToList());
          Assert.IsTrue(resp3.IsSuccess);
          Assert.IsTrue(resp3.Value.Count() > 0);
          var resp4 = client.CloseConnection();
