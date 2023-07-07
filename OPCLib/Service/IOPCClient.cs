@@ -9,14 +9,14 @@ namespace OPCLib.Service
 {
    public interface IOPCClient
    {
-      event EventHandler<TagValueChanged> TagValueChanged;
-      event EventHandler<OPCExceptionMsg> OPCException;
-      void OpenConnection(OPCConnectionString connectionString);
-      void CloseConnection();
-      IEnumerable<OPCTag> GetAllTags();
-      IEnumerable<Dictionary<string,object>> GetTagValues(IEnumerable<string> tags);
-      void WriteTagValue(string tag, object value);
-      void SubscribeValueChange(string tag);
+      event EventHandler<TagValueChangedArgument> TagValueChanged;
+      ClientResponse<bool> OpenConnection(OPCConnectionString connectionString);
+      ClientResponse<bool> CloseConnection();
+      ClientResponse<IEnumerable<OPCTag>> GetAllTags();
+      ClientResponse<IEnumerable<OPCTag>> GetTagValues(List<OPCTag> tags);
+      ClientResponse<bool> WriteTagValue(OPCTag writeTag);
+      ClientResponse<bool> SubscribeValueChange(OPCTag tag);
+      ClientResponse<bool> UnSubscribeAllValueChanges();
       bool IsConnected { get; }
    }
 }

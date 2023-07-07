@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace OPCLib.Models
 {
-   public class TagValueChanged : EventArgs
+   public class TagValueChangedArgument : EventArgs
    {
       public string Tag { get; set; }
-      public object OldValue { get; set; }
       public object NewValue { get; set; }   
    }
 }
