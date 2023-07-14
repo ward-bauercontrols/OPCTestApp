@@ -54,6 +54,10 @@
             "OpcLabs.QuickOpc": {
               "target": "Package",
               "version": "[5.71.273, )"
+            },
+            "OxyPlot.WindowsForms": {
+              "target": "Package",
+              "version": "[2.1.2, )"
             }
           },
           "imports": [

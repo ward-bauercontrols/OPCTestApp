@@ -8,7 +8,8 @@ namespace OPCLib.Models
 {
    public class TagValueChangedArgument : EventArgs
    {
-      public string Tag { get; set; }
+      public string NodeId { get; set; }
+      public string TagName { get; set; }
       public object NewValue { get; set; }   
    }
 }

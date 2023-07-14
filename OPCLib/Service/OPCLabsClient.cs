@@ -222,6 +222,39 @@ namespace OPCLib.Service
          return response;
       }
       /// <summary>
+      /// Subscribe Tag value change
+      /// </summary>
+      /// <param name="tag"></param>
+      /// <exception cref="NotImplementedException"></exception>
+      public ClientResponse<bool> SubscribeValueChange(List<OPCTag> tags)
+      {
+         ClientResponse<bool> response = new ClientResponse<bool>()
+         {
+            Operation = "Monitor Value Change"
+         };
+         Stopwatch sw = new Stopwatch();
+         sw.Start();
+         try
+         {
+            List<EasyUAMonitoredItemArguments> arguments = new List<EasyUAMonitoredItemArguments>();
+            foreach (var tag in tags)
+               arguments.Add(new EasyUAMonitoredItemArguments(null, _endpoint, tag.Id,50));
+            _opcClient.SubscribeMultipleMonitoredItems(arguments.ToArray());
+            response.IsSuccess = true;
+         }
+         catch (Exception ex)
+         {
+            response.IsSuccess = false;
+            response.ErrorMessage = ex.Message;
+         }
+         finally
+         {
+            sw.Stop();
+            response.TimeElapsed = sw.ElapsedMilliseconds;
+         }
+         return response;
+      }
+      /// <summary>
       /// Write Tag Value / update
       /// </summary>
       /// <param name="tag"></param>
@@ -292,7 +325,8 @@ namespace OPCLib.Service
       {
          TagValueChanged?.Invoke(this, new TagValueChangedArgument()
          {
-            Tag = _opcClient.ReadDisplayName(_endpoint, e.Arguments.NodeDescriptor.NodeId),
+            NodeId = e.Arguments.NodeDescriptor.NodeId,
+            TagName = _opcClient.ReadDisplayName(_endpoint, e.Arguments.NodeDescriptor.NodeId),
             NewValue = e.AttributeData.Value.ToString()
          });
       }
@@ -357,6 +391,34 @@ namespace OPCLib.Service
          sw.Stop();
          return keyValuePairs;
       }
-      
+
+      public ClientResponse<bool> WriteTagValues(List<OPCTag> writeTags)
+      {
+         ClientResponse<bool> response = new ClientResponse<bool>()
+         {
+            Operation = "Write Tag Value"
+         };
+         Stopwatch sw = new Stopwatch();
+         sw.Start();
+         try
+         {
+            List<UAWriteValueArguments> arguments = new List<UAWriteValueArguments>();
+            foreach (var node in writeTags)
+               arguments.Add(new UAWriteValueArguments(_endpoint,node.Id,node.Value));
+            var result = _opcClient.WriteMultipleValues(arguments.ToArray());
+            response.IsSuccess = !result.ToList().Any(f=>!f.Succeeded);
+         }
+         catch (Exception ex)
+         {
+            response.IsSuccess = false;
+            response.ErrorMessage = ex.Message;
+         }
+         finally
+         {
+            sw.Stop();
+            response.TimeElapsed = sw.ElapsedMilliseconds;
+         }
+         return response;
+      }
    }
 }

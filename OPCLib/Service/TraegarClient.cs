@@ -38,12 +38,22 @@ namespace OPCLib.Service
          throw new NotImplementedException();
       }
 
+      public ClientResponse<bool> SubscribeValueChange(List<OPCTag> tags)
+      {
+         throw new NotImplementedException();
+      }
+
       public ClientResponse<bool> UnSubscribeAllValueChanges()
       {
          throw new NotImplementedException();
       }
 
       public ClientResponse<bool> WriteTagValue(OPCTag writeTag)
+      {
+         throw new NotImplementedException();
+      }
+
+      public ClientResponse<bool> WriteTagValues(List<OPCTag> writeTags)
       {
          throw new NotImplementedException();
       }

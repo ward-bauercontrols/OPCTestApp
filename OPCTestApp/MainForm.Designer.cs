@@ -68,6 +68,7 @@
          toolStripMenuItem2 = new ToolStripMenuItem();
          toolStripMenuItem3 = new ToolStripMenuItem();
          dgDebug = new DataGridView();
+         btnSimulation = new Button();
          grpConnStr.SuspendLayout();
          grpAllTags.SuspendLayout();
          grpTagValues.SuspendLayout();
@@ -440,11 +441,22 @@
          dgDebug.Size = new Size(962, 199);
          dgDebug.TabIndex = 6;
          // 
+         // btnSimulation
+         // 
+         btnSimulation.Location = new Point(20, 709);
+         btnSimulation.Name = "btnSimulation";
+         btnSimulation.Size = new Size(163, 23);
+         btnSimulation.TabIndex = 7;
+         btnSimulation.Text = "Launch Simulation";
+         btnSimulation.UseVisualStyleBackColor = true;
+         btnSimulation.Click += btnSimulation_Click;
+         // 
          // MainForm
          // 
          AutoScaleDimensions = new SizeF(7F, 15F);
          AutoScaleMode = AutoScaleMode.Font;
-         ClientSize = new Size(994, 711);
+         ClientSize = new Size(994, 736);
+         Controls.Add(btnSimulation);
          Controls.Add(dgDebug);
          Controls.Add(grpTagUpdates);
          Controls.Add(grpSubscribe);
@@ -510,5 +522,6 @@
       private Label label9;
       private TextBox tbTagName;
       private DataGridView dgDebug;
+      private Button btnSimulation;
    }
 }

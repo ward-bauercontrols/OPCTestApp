@@ -15,7 +15,9 @@ namespace OPCLib.Service
       ClientResponse<IEnumerable<OPCTag>> GetAllTags();
       ClientResponse<IEnumerable<OPCTag>> GetTagValues(List<OPCTag> tags);
       ClientResponse<bool> WriteTagValue(OPCTag writeTag);
+      ClientResponse<bool> WriteTagValues(List<OPCTag> writeTags);
       ClientResponse<bool> SubscribeValueChange(OPCTag tag);
+      ClientResponse<bool> SubscribeValueChange(List<OPCTag> tags);
       ClientResponse<bool> UnSubscribeAllValueChanges();
       bool IsConnected { get; }
    }

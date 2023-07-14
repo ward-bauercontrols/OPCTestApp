@@ -54,7 +54,7 @@ namespace OPCTestApp
 
       private void _client_TagValueChanged(object sender, TagValueChangedArgument e)
       {
-         rtbSubscriptionUpdate.AppendText($"{e.Tag} = {e.NewValue} \n");
+         rtbSubscriptionUpdate.AppendText($"{e.TagName} = {e.NewValue} \n");
       }
 
       private void btnConnectTraeger_Click(object sender, EventArgs e)
@@ -217,6 +217,12 @@ namespace OPCTestApp
          }
          var response = _client.WriteTagValue(updateTag);
          DebugLog(response);
+      }
+
+      private void btnSimulation_Click(object sender, EventArgs e)
+      {
+         SimulationForm simulationForm = new SimulationForm();
+         simulationForm.Show();
       }
 
       private void DebugLog<T>(ClientResponse<T> response)
